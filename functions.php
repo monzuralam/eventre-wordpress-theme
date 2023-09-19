@@ -115,6 +115,17 @@ if (!function_exists('eventre_custom_posts')) {
             'supports'  => array('title', 'editor', 'thumbnail', 'excerpt', 'page-attributes')
         ));
 
+        register_post_type('schedule', array(
+            'labels'    =>  array(
+                'name'          =>  __('Schedules', 'eventre'),
+                'singular_name' =>  __('Schedule', 'eventre'),
+                'add_new_item'  =>  __('Add Schedule', 'eventre')
+            ),
+            'public'    =>  true,
+            'show_ui'   =>  true,
+            'supports'  => array('title', 'editor', 'thumbnail', 'excerpt', 'page-attributes')
+        ));
+
         register_taxonomy('sponsor_cat', 'sponsor', array(
             'label'             =>  __('Sponsor Category', 'eventre'),
             'hierarchical'      =>  true,
