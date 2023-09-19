@@ -76,3 +76,55 @@ if (!function_exists('eventre_assets')) {
     }
 }
 add_action('wp_enqueue_scripts', 'eventre_assets');
+
+/**
+ * Register CPT & Taxonomy
+ */
+if (!function_exists('eventre_custom_posts')) {
+    function eventre_custom_posts() {
+        register_post_type('sponsor', array(
+            'labels'    =>  array(
+                'name'          =>  __('Sponsors', 'eventre'),
+                'singular_name' =>  __('Sponsor', 'eventre'),
+                'add_new_item'  =>  __('Add Sponsor', 'eventre')
+            ),
+            'public'    =>  false,
+            'show_ui'   =>  true,
+            'supports'  => array('title', 'editor', 'thumbnail', 'excerpt', 'page-attributes')
+        ));
+
+        register_post_type('speaker', array(
+            'labels'    =>  array(
+                'name'          =>  __('Speakers', 'eventre'),
+                'singular_name' =>  __('Speaker', 'eventre'),
+                'add_new_item'  =>  __('Add Speaker', 'eventre')
+            ),
+            'public'    =>  true,
+            'show_ui'   =>  true,
+            'supports'  => array('title', 'editor', 'thumbnail', 'excerpt', 'page-attributes')
+        ));
+
+        register_post_type('person', array(
+            'labels'    =>  array(
+                'name'          =>  __('Persons', 'eventre'),
+                'singular_name' =>  __('Person', 'eventre'),
+                'add_new_item'  =>  __('Add Person', 'eventre')
+            ),
+            'public'    =>  false,
+            'show_ui'   =>  true,
+            'supports'  => array('title', 'editor', 'thumbnail', 'excerpt', 'page-attributes')
+        ));
+
+        register_taxonomy('sponsor_cat', 'sponsor', array(
+            'label'             =>  __('Sponsor Category', 'eventre'),
+            'hierarchical'      =>  true,
+            'query_var'         =>  true,
+            'show_admin_column' =>  true,
+            'rewrite'           =>  array(
+                'slug'          =>  'sponsor-category',
+                'with_front'    =>  true
+            )
+        ));
+    }
+}
+add_action('init', 'eventre_custom_posts');
